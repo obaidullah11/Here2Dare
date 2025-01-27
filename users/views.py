@@ -23,6 +23,8 @@ from django.contrib.auth.hashers import make_password
 import random
 from rest_framework.exceptions import ValidationError
 import string
+from django.conf import settings
+from twilio.rest import Client
 # class UserDetailViewnew(APIView):
 #     # Specify that the view should use 'custom_id' for lookups
 #     lookup_field = 'custom_id'
@@ -377,9 +379,56 @@ class UserDetailViewnew(APIView):
 
         # Response indicating success and message
         # return Response({'success': True, 'message': 'User registered successfully. OTP sent to your email'}, status=status.HTTP_201_CREATED)
-class UserRegistrationView(APIView):
-    renderer_classes = [UserRenderer]
+# class UserRegistrationView(APIView):
+#     renderer_classes = [UserRenderer]
 
+#     def post(self, request, format=None):
+#         serializer = UserRegistrationSerializer(data=request.data)
+
+#         try:
+#             serializer.is_valid(raise_exception=True)
+#         except ValidationError as e:
+#             error_detail = e.detail
+#             if 'email' in error_detail:
+#                 return Response({'success': False, 'error': "User with this Email already exists."}, status=status.HTTP_400_BAD_REQUEST)
+#             else:
+#                 return Response({'success': False, 'error': error_detail}, status=status.HTTP_400_BAD_REQUEST)
+
+#         to_email = request.data.get('email')
+
+#         # Generate 4-digit API code
+#         api_code = get_random_string(length=4, allowed_chars='0123456789')
+#         otp_code = api_code
+
+#         # Save user data with the OTP code
+#         user = serializer.save(otp_code=otp_code)
+#         print(f"User {to_email} saved successfully with OTP code {otp_code}.")
+
+#         # Send email to the user
+#         subject = 'Your 4-digit API'
+#         message = f'Your 4-digit API is: {api_code}'
+#         from_email = 'muhammadobaidullah1122@gmail.com'  # Update with your email
+#         try:
+#             send_mail(subject, message, from_email, [to_email])
+#             print(f"OTP email sent to {to_email}.")
+#         except Exception as e:
+#             # If sending email fails, return failure response
+#             print(f"Failed to send OTP email to {to_email}. Error: {e}")
+#             return Response({'success': False, 'message': 'Failed to send OTP email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+#         # Get tokens for user
+#         token = get_tokens_for_user(user)
+#         print(f"Tokens generated for user {user.username}.")
+
+#         # Response indicating success and message
+#         return Response({
+#             'success': True,
+#             'message': 'User registered successfully. OTP sent to your email.',
+
+#         }, status=status.HTTP_201_CREATED)
+        
+
+class UserRegistrationView(APIView):
     def post(self, request, format=None):
         serializer = UserRegistrationSerializer(data=request.data)
 
@@ -393,37 +442,48 @@ class UserRegistrationView(APIView):
                 return Response({'success': False, 'error': error_detail}, status=status.HTTP_400_BAD_REQUEST)
 
         to_email = request.data.get('email')
+        to_contact = request.data.get('contact')
 
-        # Generate 4-digit API code
-        api_code = get_random_string(length=4, allowed_chars='0123456789')
-        otp_code = api_code
+        if not to_contact:
+            return Response({'success': False, 'error': 'Phone number is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Generate 5-digit OTP
+        otp_code = get_random_string(length=5, allowed_chars='0123456789')
 
         # Save user data with the OTP code
         user = serializer.save(otp_code=otp_code)
         print(f"User {to_email} saved successfully with OTP code {otp_code}.")
 
-        # Send email to the user
-        subject = 'Your 4-digit API'
-        message = f'Your 4-digit API is: {api_code}'
+        # Send Email OTP
+        subject = 'Your 5-digit API OTP'
+        message = f'{settings.TWILIO_MESSAGE_PART1}{otp_code}. {settings.TWILIO_MESSAGE_PART2}'
         from_email = 'muhammadobaidullah1122@gmail.com'  # Update with your email
         try:
             send_mail(subject, message, from_email, [to_email])
             print(f"OTP email sent to {to_email}.")
         except Exception as e:
-            # If sending email fails, return failure response
             print(f"Failed to send OTP email to {to_email}. Error: {e}")
             return Response({'success': False, 'message': 'Failed to send OTP email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # Get tokens for user
-        token = get_tokens_for_user(user)
-        print(f"Tokens generated for user {user.username}.")
+        # Send SMS OTP
+        try:
+            twilio_client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+            twilio_client.messages.create(
+                body=f'{settings.TWILIO_MESSAGE_PART1}{otp_code}. {settings.TWILIO_MESSAGE_PART2}',
+                from_=settings.TWILIO_SMS_FROM_NUMBER,
+                to=to_contact if to_contact.startswith('+') else f'+{to_contact}'  # Ensure E.164 format
+            )
+            print(f"OTP SMS sent to {to_contact}.")
+        except Exception as e:
+            print(f"Failed to send OTP SMS to {to_contact}. Error: {e}")
+            return Response({'success': False, 'message': 'Failed to send OTP SMS'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # Response indicating success and message
+        # Response indicating success
         return Response({
             'success': True,
-            'message': 'User registered successfully. OTP sent to your email.',
-
+            'message': 'User registered successfully. OTP sent to your email and phone.',
         }, status=status.HTTP_201_CREATED)
+
 class VerifyOTP(APIView):
     def post(self, request):
         code = request.data.get('code')

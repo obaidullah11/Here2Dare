@@ -88,14 +88,6 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'jazzmin',
-    # The general purpose templates
-    'adminlte3',
-
-    # Optional: Skin for the admin interface
-     'adminlte3_theme',
-
-    # Any apps which need to have their templates overridden by adminlte
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,34 +97,26 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    
-   
-    
-    # 'Here2Dareproducts',
-    # 'notifications',
-
-
-    # 'products',
-    # 'import_export',
-    # 'adminsortable2',
     'users',
-    # 'interests',
-    # 'Events',
-    # 'factory',
-    # 'importer',
-    # 'vehicles',
-    # 'Garage',
-    # 'Maintenance',
     'sslserver',
+    'drf_yasg',
     
-    # 'fixtures',
-
-    # 'Here2Dare_Admin',
-    # 'sortedm2m',
-
-    # 'dealer',
-    # 'dealers',
+    
 ]
+
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+}
+  # Change to "test" for testing
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -220,13 +204,12 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
-
     'DEFAULT_AUTHENTICATION_CLASSES': (
-
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',  # Ensure this is set for Swagger
 }
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../', 'static')
 # STATICFILES_DIRS = [
@@ -380,3 +363,48 @@ JAZZMIN_SETTINGS = {
 }
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 USE_DJANGO_JQUERY = True
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'knet': {  # Add your app name here
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+# Create logs directory if it doesn't exist
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOGS_DIR):
+    os.makedirs(LOGS_DIR)
