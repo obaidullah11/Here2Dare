@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'sslserver',
-    'drf_yasg',  # Swagger/OpenAPI documentation
+    'drf_yasg',
+    # 'admin_tools.stats',
+    # 'admin_tools',
+    # 'admin_tools_stats',  # Swagger/OpenAPI documentation
 ]
 
 SWAGGER_SETTINGS = {
@@ -55,7 +58,9 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False,
 }
-
+JAZZMIN_UI_TWEAKS = {
+     "sidebar_fixed": True,
+}
 # Middleware configuration - handles request/response cycle
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,7 +117,62 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+JAZZMIN_SETTINGS = {
+    "site_title": "Here2Dare Admin",
+    "site_header": "Here2Dare Admin Panel",
+    "site_brand": "Here2Dare",
+    "welcome_sign": "Welcome to Here2Dare Admin",
+    "copyright": "Here2Dare 2025",
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index"},
+        {"app": "user"},
+    ],
+    "navigation_expanded": True,
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": True,
+    "order_with_respect_to": ["auth", "user"],
+    "custom_css": None,
+    "hide_models": ['auth.group'],
+    "dashboard": {
+        "widgets": [
+            {
+                "type": "count",
+                "model": "auth.User",
+                "title": "Total Users",
+                "icon": "fas fa-users",
+                "url": "admin:auth_user_changelist",
+                "classes": "bg-primary text-white",
+            },
+            {
+                "type": "count",
+                "model": "auth.Group",
+                "title": "Total Groups",
+                "icon": "fas fa-users-cog",
+                "url": "admin:auth_group_changelist",
+                "classes": "bg-info text-white",
+            },
+            {
+                "type": "custom",
+                "title": "Quick Stats",
+                "content": """
+                    <ul>
+                        <li>Recent Orders: 75</li>
+                        <li>Pending Tasks: 5</li>
+                        <li>Active Users: 120</li>
+                    </ul>
+                """,
+                "icon": "fas fa-chart-line",
+                "classes": "bg-warning text-white",
+            },
+        ]
+    }
+}
 # File upload and localization settings
 MAX_UPLOAD_SIZE = "429916160"  # Approximately 410MB
 LANGUAGE_CODE = 'en-us'
