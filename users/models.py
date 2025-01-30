@@ -8,35 +8,41 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth.base_user import BaseUserManager
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, contact, username , password=None, **extra_fields):
+    def create_user(self, email, phone_number, username=None, password=None, **extra_fields):
         """
-        Creates and saves a User with the given email, contact, name, and password.
+        Creates and saves a User with the given email, phone_number, username, and password.
         """
-        if not contact:
-            raise ValueError('The Contact field must be set')
         if not email:
             raise ValueError('The Email field must be set')
+        if not phone_number:
+            raise ValueError('The Phone Number field must be set')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, contact=contact, username=username , **extra_fields)
+        if not username:
+            username = email  # Set username to email if not provided
+        user = self.model(email=email, phone_number=phone_number, username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, contact, username , password=None, **extra_fields):
+    def create_superuser(self, email, phone_number, username=None, password=None, **extra_fields):
         """
-        Creates and saves a superuser with the given email, contact, name, and password.
+        Creates and saves a superuser with the given email, phone_number, username, and password.
         """
         extra_fields.setdefault('is_admin', True)
         extra_fields.setdefault('is_superuser', True)
-        # extra_fields.setdefault('is_staff', True)
 
         if extra_fields.get('is_admin') is not True:
             raise ValueError('Superuser must have is_admin=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(email, contact, username , password, **extra_fields)
+        if not username:
+            username = email  # Automatically use email as the username if not provided
+
+        return self.create_user(email, phone_number, username, password, **extra_fields)
+
+
 class CustomUserIDField(models.CharField):
     def pre_save(self, model_instance, add):
         # Generate a 6-digit ID if it's a new instance
@@ -47,49 +53,51 @@ class CustomUserIDField(models.CharField):
 # Create your models here.
 class User(AbstractUser):
     full_name = models.CharField(max_length=150, null=True, blank=True)
-    
+    country = models.CharField(max_length=50, blank=True)
+    phone_number = models.CharField(max_length=15, blank=True)
+
+    # Address Information
+    city = models.CharField(max_length=50, blank=True)
+    state = models.CharField(max_length=50, blank=True)
+    postal_code = models.CharField(max_length=10, blank=True)
+    country_code = models.CharField(max_length=5, blank=True)
     address = models.TextField(null=True, blank=True)
+    
     id = CustomUserIDField(primary_key=True, max_length=6, editable=False)
     
-    USER_TYPE_CHOICES = (
-        ('client', 'client'),
-        ('admin', 'admin'),
-        ('super_admin', 'Super Admin'),
-    )
-    
-    contact = models.CharField(max_length=255, blank=True)
     device_token = models.CharField(max_length=255, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    Trade_radius = models.CharField(max_length=6, null=True, blank=True)
+    
     is_registered = models.BooleanField(default=False)
     verify = models.BooleanField(default=False)
     otp_code = models.CharField(max_length=6, null=True, blank=True)
     is_deleted = models.BooleanField(default=False)
-    username = models.CharField(max_length=200)  # This is your "name" field in forms
-    user_type = models.CharField(max_length=255, default='client', choices=USER_TYPE_CHOICES)
-    email = models.EmailField(verbose_name='Email', max_length=255, unique=True)
-     
-    origin = models.CharField(max_length=200,null=True, blank=True)     
-    uid = models.CharField(max_length=200,null=True, blank=True)     
     
-       
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    user_type = models.CharField(
+        max_length=20,
+        choices=[('Shopper', 'Shopper'), ('driver', 'Driver'), ('admin', 'Admin')],
+        default='Shopper',
+    )
+
+    email = models.EmailField(verbose_name='Email', max_length=255, unique=True)
+    origin = models.CharField(max_length=200, null=True, blank=True)
+    uid = models.CharField(max_length=200, null=True, blank=True)
+
+    is_banned = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='user_images/', null=True, blank=True)
-    visible_to_user = models.BooleanField(default=True)  # Determines if the user profile is visible
-    twitter_url = models.URLField(max_length=255, null=True, blank=True)  # Twitter profile link
-    instagram_url = models.URLField(max_length=255, null=True, blank=True)  # Instagram profile link
-    facebook_url = models.URLField(max_length=255, null=True, blank=True)  # Facebook profile link
+    language = models.CharField(max_length=10, default='en')
+    bio = models.TextField(blank=True)
 
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['contact', 'username']  # Include 'username' for superuser creation
+    REQUIRED_FIELDS = ['phone_number']
 
     def __str__(self):
         return self.email

@@ -25,6 +25,153 @@ from rest_framework.exceptions import ValidationError
 import string
 from django.conf import settings
 from twilio.rest import Client
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from rest_framework.decorators import api_view
+from django.core.mail import send_mail
+from django.http import JsonResponse
+import json
+import json
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from users.serializers import EmailSerializer
+from rest_framework.generics import GenericAPIView
+from drf_yasg.utils import swagger_auto_schema
+
+from django.conf import settings
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from twilio.rest import Client
+import random
+
+from .serializers import SendOTPSerializer, VerifyOTPSerializer
+
+# Temporary OTP storage (In production, use Redis or a database)
+OTP_STORAGE = {}
+
+from django.conf import settings
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from twilio.rest import Client
+import random
+
+from .serializers import SendOTPSerializer, VerifyOTPSerializer
+
+# Temporary OTP storage (Use Redis or database in production)
+OTP_STORAGE = {}
+
+from django.conf import settings
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from twilio.rest import Client
+import random
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
+from .serializers import SendOTPSerializer, VerifyOTPSerializer
+
+# Temporary OTP storage (Use Redis or a database in production)
+OTP_STORAGE = {}
+
+class SendOTPView(APIView):
+    """
+    Send OTP via Twilio to the given phone number.
+    """
+
+    @swagger_auto_schema(
+        request_body=SendOTPSerializer,
+        responses={200: openapi.Response("OTP sent successfully!", SendOTPSerializer)},
+    )
+    def post(self, request):
+        serializer = SendOTPSerializer(data=request.data)
+
+        if serializer.is_valid():
+            phone_number = serializer.validated_data["phone_number"]
+
+            # Generate a random 6-digit OTP
+            otp = str(random.randint(100000, 999999))
+
+            # Twilio client
+            client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+
+            message_body = f"{settings.TWILIO_MESSAGE_PART1}{otp}. {settings.TWILIO_MESSAGE_PART2}"
+
+            try:
+                # Send SMS
+                client.messages.create(
+                    body=message_body,
+                    from_=settings.TWILIO_SMS_FROM_NUMBER,
+                    to=phone_number
+                )
+
+                # Store OTP temporarily
+                OTP_STORAGE[phone_number] = otp
+
+                return Response({
+                    "message": "OTP sent successfully!",
+                    "otp": otp  # Returning OTP in response
+                }, status=status.HTTP_200_OK)
+
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class VerifyOTPView(APIView):
+    """
+    Verify the OTP received on the given phone number.
+    """
+
+    @swagger_auto_schema(
+        request_body=VerifyOTPSerializer,
+        responses={200: openapi.Response("OTP verified successfully!")}
+    )
+    def post(self, request):
+        serializer = VerifyOTPSerializer(data=request.data)
+
+        if serializer.is_valid():
+            phone_number = serializer.validated_data["phone_number"]
+            otp = serializer.validated_data["otp"]
+
+            # Check if OTP is valid
+            if OTP_STORAGE.get(phone_number) == otp:
+                # OTP is correct, remove it from storage
+                del OTP_STORAGE[phone_number]
+                return Response({"message": "OTP verified successfully!"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Invalid OTP."}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SendEmailView(GenericAPIView):
+    serializer_class = EmailSerializer
+
+    @swagger_auto_schema(
+        request_body=EmailSerializer,
+        responses={200: "Email sent successfully!", 400: "Validation Error", 500: "Internal Server Error"},
+    )
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            subject = serializer.validated_data['subject']
+            body = serializer.validated_data['body']
+            to_email = serializer.validated_data['to_email']
+
+            try:
+                send_mail(subject, body, 'your_email@example.com', [to_email])
+                return Response({"message": "Email sent successfully!"}, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # class UserDetailViewnew(APIView):
 #     # Specify that the view should use 'custom_id' for lookups
 #     lookup_field = 'custom_id'

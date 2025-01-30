@@ -1,10 +1,14 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import UserDetailViewnew,UserDetailView,UpdatePasswordViewnew,UseradminLoginView,ResendOTPView,set_new_password,SocialLoginOrRegisterView,SendPasswordResetEmailView,VerifyOTP,list_users,UserUpdateAPIView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView,UserDeleteAPIView, UserPasswordResetView
+from users.views import VerifyOTPView,SendOTPView,SendEmailView,UserDetailViewnew,UserDetailView,UpdatePasswordViewnew,UseradminLoginView,ResendOTPView,set_new_password,SocialLoginOrRegisterView,SendPasswordResetEmailView,VerifyOTP,list_users,UserUpdateAPIView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView,UserDeleteAPIView, UserPasswordResetView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+# from . views import *
 
 urlpatterns = [
+
+
+    
     # path('register/', UserRegistrationView.as_view(), name='register'),
     # path('login/', UserLoginView.as_view(), name='login'),
     # path('admin/login/', UseradminLoginView.as_view(), name='login'),
@@ -23,6 +27,9 @@ urlpatterns = [
     # path('api/social_login_or_register/', SocialLoginOrRegisterView.as_view(), name='social_login_or_register'),
     # path('user/<str:id>/', UserDetailView.as_view(), name='user_detail'),
     # path("update-password/", UpdatePasswordViewnew.as_view(), name="update-password"),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('send-email/', SendEmailView.as_view(), name='send_email'),
+    path("send-otp/", SendOTPView.as_view(), name="send_otp"),
+    path("verify-otp/", VerifyOTPView.as_view(), name="verify_otp"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

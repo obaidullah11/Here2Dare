@@ -8,6 +8,20 @@ from users.utils import Util
 
 
 
+from rest_framework import serializers
+
+class EmailSerializer(serializers.Serializer):
+    subject = serializers.CharField(max_length=255)
+    body = serializers.CharField()
+    to_email = serializers.EmailField()
+
+
+class SendOTPSerializer(serializers.Serializer):
+    phone_number = serializers.CharField(max_length=15)
+
+class VerifyOTPSerializer(serializers.Serializer):
+    phone_number = serializers.CharField(max_length=15)
+    otp = serializers.CharField(max_length=6)
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -1,27 +1,31 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User
+from django.contrib.auth.admin import UserAdmin
+from .models import User  # import your custom User model
 
-class UserAdmin(BaseUserAdmin):
+class CustomUserAdmin(UserAdmin):
+    # Fields to be displayed in the admin form
+    model = User
+    list_display = (
+        'email', 'username', 'full_name', 'is_active', 'is_admin', 'is_registered'
+    )
+    list_filter = ('is_active', 'is_admin')
+    search_fields = ('email', 'username', 'full_name')
+    ordering = ('email',)
+
+    # Fields displayed when editing the user
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'password')}),
-        ('Personal info', {'fields': ('user_type', 'image', 'device_token', 'address', 'visible_to_user', 'twitter_url', 'instagram_url', 'facebook_url')}),
-        ('Permissions', {'fields': ('is_active', 'is_superuser')}),
-        ('Important dates', {'fields': ('last_login',)}),
+        (None, {'fields': ('email', 'password')}),
+        ('Personal Info', {'fields': ('full_name', 'phone_number', 'address', 'city', 'state', 'postal_code', 'country_code')}),
+        ('Permissions', {'fields': ('is_active', 'is_admin',  'is_banned', 'is_deleted')}),
+        ('Important Dates', {'fields': ('last_login',  )}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'user_type', 'password1', 'password2'),
-        }),
+            'fields': ('email', 'password1', 'password2', 'full_name', 'phone_number', 'user_type', 'is_active',  'is_admin')}
+        ),
     )
-    list_display = (
-        'id', 'username', 'device_token', 'otp_code', 'verify', 'email', 'user_type', 'is_active', 
-        'is_staff', 'is_superuser', 'full_name', 'address', 'longitude', 'latitude', 'Trade_radius',
-        'visible_to_user', 'twitter_url', 'instagram_url', 'facebook_url'
-    )
-    list_filter = ('user_type', 'is_active', 'is_superuser')
-    search_fields = ('username', 'email')
-    ordering = ('username',)
+    filter_horizontal = ()
 
-admin.site.register(User, UserAdmin)
+# Register the custom User model with the custom admin
+admin.site.register(User, CustomUserAdmin)

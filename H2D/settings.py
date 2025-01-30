@@ -19,8 +19,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'coppercool1234@gmail.com'
-EMAIL_HOST_PASSWORD = 'cvfp dthd yqat dwxa'
+EMAIL_HOST_USER = 'muhammadobaidullah1122@gmail.com'
+EMAIL_HOST_PASSWORD = 'owgv yxkq kfin ylru'
+
 
 # Development and deployment settings
 DEBUG = True
@@ -28,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition - includes Django core apps and third-party integrations
 INSTALLED_APPS = [
+    # 'admin_adminlte.apps.AdminAdminlteConfig',
     'jazzmin',  # Admin panel theme
     # Django default apps
     'django.contrib.admin',

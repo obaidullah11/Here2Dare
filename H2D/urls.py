@@ -13,11 +13,18 @@ urlpatterns = [
     
     # Django admin interface
     path('admin/', admin.site.urls),
+    # path('adminlte/', include('admin_adminlte.urls')),
+    # path("unfold-admin/", new_admin_site.urls),
     
     # User API endpoints (currently commented out)
-    path('api/user/', include('users.urls')),
+    path('', include('users.urls')),
     
+    # JWT Authentication endpoints
+    # Endpoint to obtain JWT token pair (access and refresh tokens)
+    path('api/token',TokenObtainPairView.as_view(),name='token_obtain_pair'),
     
+    # Endpoint to refresh JWT access token using refresh token
+    path('api/token/referesh/',TokenRefreshView.as_view(),name='token_refresh'),
 ]
 
 # Serve static files during development
