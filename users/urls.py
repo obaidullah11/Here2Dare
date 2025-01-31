@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import newSendOTPView,ValidateJWTView,FileUploadnView,RegisterUserView,CheckEmailView,VerifyOTPView,SendOTPView,SendEmailView,UserDetailViewnew,UserDetailView,UpdatePasswordViewnew,UseradminLoginView,ResendOTPView,set_new_password,SocialLoginOrRegisterView,SendPasswordResetEmailView,VerifyOTP,list_users,UserUpdateAPIView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView,UserDeleteAPIView, UserPasswordResetView
+from users.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 # from . views import *
 
@@ -12,8 +12,10 @@ urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register-user'),
     path('upload-doc/', FileUploadnView.as_view(), name='upload-doc'),
     path('validate-token/', ValidateJWTView.as_view(), name='validate-token'),
-
-    
+    path('check-Phonenumber/', CheckPhoneNumberView.as_view(), name='check_email'),
+    path("login/", PhoneLoginAPIView.as_view(), name="phone_login"),
+    path("getuserprofile/", UserProfileView.as_view(), name="UserProfileView"),
+    # path("updateuserprofile/", UpdateUserProfileView.as_view(), name="UserProfileView"),
     # path('register/', UserRegistrationView.as_view(), name='register'),
     # path('login/', UserLoginView.as_view(), name='login'),
     # path('admin/login/', UseradminLoginView.as_view(), name='login'),

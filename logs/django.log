@@ -4343,3 +4343,166 @@ WARNING 2025-01-31 10:06:04,062 basehttp 4628 10924 "POST /api/verify-otp/ HTTP/
 INFO 2025-01-31 10:06:12,048 basehttp 4628 10924 "POST /api/verify-otp/ HTTP/1.1" 200 40
 INFO 2025-01-31 10:09:11,189 autoreload 4628 7980 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\settings.py changed, reloading.
 INFO 2025-01-31 10:09:12,034 autoreload 9212 11220 Watching for file changes with StatReloader
+INFO 2025-01-31 10:26:42,275 autoreload 16492 13208 Watching for file changes with StatReloader
+INFO 2025-01-31 10:26:48,939 basehttp 16492 9052 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 10:26:49,086 basehttp 16492 9052 "GET /?format=openapi HTTP/1.1" 200 9936
+INFO 2025-01-31 10:31:50,764 autoreload 16492 13208 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 10:31:51,666 autoreload 412 22020 Watching for file changes with StatReloader
+INFO 2025-01-31 10:32:11,032 autoreload 412 22020 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 10:32:11,822 autoreload 2388 14964 Watching for file changes with StatReloader
+INFO 2025-01-31 10:33:02,319 autoreload 2388 14964 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 10:33:03,032 autoreload 12076 1860 Watching for file changes with StatReloader
+INFO 2025-01-31 10:33:10,809 autoreload 12076 1860 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 10:33:11,624 autoreload 6580 1744 Watching for file changes with StatReloader
+INFO 2025-01-31 10:33:16,126 basehttp 6580 6832 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 10:33:16,259 basehttp 6580 6832 "GET /?format=openapi HTTP/1.1" 200 10385
+INFO 2025-01-31 10:33:33,937 basehttp 6580 6832 "POST /api/check-Phonenumber/ HTTP/1.1" 200 107
+INFO 2025-01-31 10:39:07,161 autoreload 6580 1744 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 10:39:08,213 autoreload 10720 9228 Watching for file changes with StatReloader
+INFO 2025-01-31 10:39:18,633 basehttp 10720 13012 "POST /api/check-Phonenumber/ HTTP/1.1" 200 139
+INFO 2025-01-31 11:27:09,561 autoreload 10720 9228 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:27:11,301 autoreload 11156 9236 Watching for file changes with StatReloader
+INFO 2025-01-31 11:29:08,083 autoreload 11156 9236 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:29:08,928 autoreload 6268 3660 Watching for file changes with StatReloader
+INFO 2025-01-31 11:29:20,857 autoreload 6268 3660 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:29:21,653 autoreload 8548 21428 Watching for file changes with StatReloader
+INFO 2025-01-31 11:29:30,397 autoreload 8548 21428 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 11:29:31,240 autoreload 3800 9764 Watching for file changes with StatReloader
+INFO 2025-01-31 11:29:56,805 autoreload 3800 9764 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 11:29:57,626 autoreload 5736 23352 Watching for file changes with StatReloader
+INFO 2025-01-31 11:30:01,992 basehttp 5736 20052 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 11:30:02,142 basehttp 5736 20052 "GET /?format=openapi HTTP/1.1" 200 10739
+INFO 2025-01-31 11:31:40,421 autoreload 5736 23352 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:31:41,195 autoreload 15544 11720 Watching for file changes with StatReloader
+INFO 2025-01-31 11:31:43,206 basehttp 15544 21556 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 11:31:43,329 basehttp 15544 21556 "GET /?format=openapi HTTP/1.1" 200 11735
+INFO 2025-01-31 11:33:48,940 autoreload 15544 11720 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:33:49,694 autoreload 19516 3800 Watching for file changes with StatReloader
+INFO 2025-01-31 11:33:56,312 autoreload 19516 3800 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:33:57,066 autoreload 16964 8232 Watching for file changes with StatReloader
+INFO 2025-01-31 11:34:02,811 autoreload 16964 8232 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:34:03,582 autoreload 7660 10268 Watching for file changes with StatReloader
+INFO 2025-01-31 11:34:10,676 basehttp 7660 20352 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 11:34:10,798 basehttp 7660 20352 "GET /?format=openapi HTTP/1.1" 200 11742
+WARNING 2025-01-31 11:34:48,212 log 7660 20352 Unauthorized: /api/api/login/
+WARNING 2025-01-31 11:34:48,214 basehttp 7660 20352 "POST /api/api/login/ HTTP/1.1" 401 45
+INFO 2025-01-31 11:35:04,652 basehttp 7660 20352 "POST /api/api/login/ HTTP/1.1" 200 645
+INFO 2025-01-31 11:38:54,494 autoreload 7660 10268 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:38:55,265 autoreload 17744 13632 Watching for file changes with StatReloader
+INFO 2025-01-31 11:38:57,846 basehttp 17744 14056 "GET / HTTP/1.1" 200 1577
+ERROR 2025-01-31 11:38:58,639 log 17744 14056 Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\drf_yasg\renderers.py", line 36, in render
+    return codec.encode(data)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\drf_yasg\codecs.py", line 87, in encode
+    return force_bytes(self._dump_dict(spec))
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\drf_yasg\codecs.py", line 127, in _dump_dict
+    return json.dumps(spec, ensure_ascii=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type UserProfileSerializer is not JSON serializable
+ERROR 2025-01-31 11:38:58,641 basehttp 17744 14056 "GET /?format=openapi HTTP/1.1" 500 154694
+INFO 2025-01-31 11:41:54,515 autoreload 17744 13632 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:41:55,300 autoreload 7276 7776 Watching for file changes with StatReloader
+INFO 2025-01-31 11:42:00,493 basehttp 7276 13228 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 11:42:00,619 basehttp 7276 13228 "GET /?format=openapi HTTP/1.1" 200 15045
+INFO 2025-01-31 11:42:39,875 basehttp 7276 13228 "POST /api/api/login/ HTTP/1.1" 200 1612
+INFO 2025-01-31 11:44:13,771 autoreload 7276 7776 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 11:44:14,616 autoreload 1844 5508 Watching for file changes with StatReloader
+INFO 2025-01-31 11:44:20,680 basehttp 1844 10552 "POST /api/api/login/ HTTP/1.1" 200 1665
+INFO 2025-01-31 12:53:03,109 autoreload 18940 22924 Watching for file changes with StatReloader
+INFO 2025-01-31 12:54:22,239 autoreload 24340 14896 Watching for file changes with StatReloader
+INFO 2025-01-31 12:55:14,600 autoreload 21264 25908 Watching for file changes with StatReloader
+INFO 2025-01-31 12:55:43,198 autoreload 26256 17548 Watching for file changes with StatReloader
+INFO 2025-01-31 12:56:18,806 autoreload 26188 19656 Watching for file changes with StatReloader
+INFO 2025-01-31 12:56:48,307 autoreload 15368 2652 Watching for file changes with StatReloader
+INFO 2025-01-31 12:57:23,017 autoreload 5728 19448 Watching for file changes with StatReloader
+INFO 2025-01-31 12:58:27,822 autoreload 11832 10188 Watching for file changes with StatReloader
+INFO 2025-01-31 12:59:24,472 autoreload 23144 14796 Watching for file changes with StatReloader
+INFO 2025-01-31 13:02:35,097 basehttp 23144 24136 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 13:02:35,272 basehttp 23144 24136 "GET /?format=openapi HTTP/1.1" 200 15258
+INFO 2025-01-31 14:14:26,202 basehttp 23144 27152 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 14:14:26,339 basehttp 23144 27152 "GET /?format=openapi HTTP/1.1" 200 15258
+INFO 2025-01-31 14:14:58,240 basehttp 23144 27152 "POST /api/api/login/ HTTP/1.1" 200 1665
+INFO 2025-01-31 14:38:32,160 basehttp 23144 24884 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 14:38:32,296 basehttp 23144 24884 "GET /?format=openapi HTTP/1.1" 200 15258
+INFO 2025-01-31 15:52:56,480 autoreload 5740 3488 Watching for file changes with StatReloader
+INFO 2025-01-31 15:52:59,704 basehttp 5740 16112 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 15:52:59,848 basehttp 5740 16112 "GET /?format=openapi HTTP/1.1" 200 15258
+INFO 2025-01-31 15:53:49,319 autoreload 5740 3488 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 15:53:49,810 autoreload 19708 1512 Watching for file changes with StatReloader
+INFO 2025-01-31 15:54:42,724 autoreload 19708 1512 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 15:54:43,351 autoreload 23628 9644 Watching for file changes with StatReloader
+INFO 2025-01-31 15:55:03,449 autoreload 23628 9644 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 15:55:03,956 autoreload 23280 8168 Watching for file changes with StatReloader
+INFO 2025-01-31 15:56:14,953 autoreload 23280 8168 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 15:56:15,459 autoreload 3032 27624 Watching for file changes with StatReloader
+INFO 2025-01-31 15:56:36,578 autoreload 3032 27624 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 15:56:37,069 autoreload 13420 25440 Watching for file changes with StatReloader
+INFO 2025-01-31 15:57:37,254 autoreload 13420 25440 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 15:57:37,743 autoreload 11796 24196 Watching for file changes with StatReloader
+INFO 2025-01-31 15:59:32,363 autoreload 11796 24196 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 15:59:32,911 autoreload 26956 22896 Watching for file changes with StatReloader
+INFO 2025-01-31 16:00:19,766 autoreload 26956 22896 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 16:00:20,254 autoreload 17640 26544 Watching for file changes with StatReloader
+INFO 2025-01-31 16:00:24,340 basehttp 17640 22924 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 16:00:24,468 basehttp 17640 22924 "GET /?format=openapi HTTP/1.1" 200 15453
+INFO 2025-01-31 16:01:04,069 basehttp 17640 22924 "POST /api/api/login/ HTTP/1.1" 200 1665
+INFO 2025-01-31 16:01:42,178 basehttp 17640 22924 "GET /api/getuserprofile/ HTTP/1.1" 200 1272
+INFO 2025-01-31 16:03:11,736 autoreload 17640 26544 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 16:03:12,289 autoreload 22920 22888 Watching for file changes with StatReloader
+INFO 2025-01-31 16:03:19,425 basehttp 22920 3784 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 16:03:19,564 basehttp 22920 3784 "GET /?format=openapi HTTP/1.1" 200 15702
+INFO 2025-01-31 16:03:48,321 autoreload 22920 22888 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 16:03:48,797 autoreload 8636 8616 Watching for file changes with StatReloader
+INFO 2025-01-31 16:03:56,483 autoreload 8636 8616 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 16:03:56,966 autoreload 4604 25440 Watching for file changes with StatReloader
+INFO 2025-01-31 16:08:54,380 autoreload 4604 25440 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 16:08:54,880 autoreload 19896 2640 Watching for file changes with StatReloader
+INFO 2025-01-31 16:12:23,208 autoreload 7692 23008 Watching for file changes with StatReloader
+INFO 2025-01-31 16:12:58,476 autoreload 27228 19064 Watching for file changes with StatReloader
+INFO 2025-01-31 16:14:28,466 autoreload 27228 19064 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 16:14:28,937 autoreload 22176 21800 Watching for file changes with StatReloader
+INFO 2025-01-31 16:15:52,522 autoreload 22176 21800 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\models.py changed, reloading.
+INFO 2025-01-31 16:15:53,068 autoreload 18464 23976 Watching for file changes with StatReloader
+INFO 2025-01-31 16:16:44,812 autoreload 18464 23976 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 16:16:45,372 autoreload 5160 3688 Watching for file changes with StatReloader
+INFO 2025-01-31 16:16:47,842 basehttp 5160 26972 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 16:16:47,981 basehttp 5160 26972 "GET /?format=openapi HTTP/1.1" 200 15694
+INFO 2025-01-31 16:54:28,792 autoreload 23408 25864 Watching for file changes with StatReloader
+INFO 2025-01-31 16:55:36,200 autoreload 23408 25864 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 16:55:36,688 autoreload 10160 3596 Watching for file changes with StatReloader
+INFO 2025-01-31 16:56:22,341 autoreload 10160 3596 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 16:56:22,826 autoreload 24428 26684 Watching for file changes with StatReloader
+INFO 2025-01-31 17:01:26,248 autoreload 24428 26684 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 17:01:26,748 autoreload 27488 21368 Watching for file changes with StatReloader
+INFO 2025-01-31 17:07:46,059 autoreload 27488 21368 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 17:07:46,544 autoreload 9064 22932 Watching for file changes with StatReloader
+INFO 2025-01-31 17:08:38,355 autoreload 9064 22932 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 17:08:38,837 autoreload 1836 13612 Watching for file changes with StatReloader
+INFO 2025-01-31 17:08:41,612 basehttp 1836 15096 "GET / HTTP/1.1" 200 1633
+INFO 2025-01-31 17:08:41,734 basehttp 1836 15096 "GET /?format=openapi HTTP/1.1" 200 15694
