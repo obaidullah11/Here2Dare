@@ -1,12 +1,17 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import VerifyOTPView,SendOTPView,SendEmailView,UserDetailViewnew,UserDetailView,UpdatePasswordViewnew,UseradminLoginView,ResendOTPView,set_new_password,SocialLoginOrRegisterView,SendPasswordResetEmailView,VerifyOTP,list_users,UserUpdateAPIView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView,UserDeleteAPIView, UserPasswordResetView
+from users.views import newSendOTPView,ValidateJWTView,FileUploadnView,RegisterUserView,CheckEmailView,VerifyOTPView,SendOTPView,SendEmailView,UserDetailViewnew,UserDetailView,UpdatePasswordViewnew,UseradminLoginView,ResendOTPView,set_new_password,SocialLoginOrRegisterView,SendPasswordResetEmailView,VerifyOTP,list_users,UserUpdateAPIView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView,UserDeleteAPIView, UserPasswordResetView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 # from . views import *
 
 urlpatterns = [
 
+
+    path('check-email/', CheckEmailView.as_view(), name='check_email'),
+    path('register/', RegisterUserView.as_view(), name='register-user'),
+    path('upload-doc/', FileUploadnView.as_view(), name='upload-doc'),
+    path('validate-token/', ValidateJWTView.as_view(), name='validate-token'),
 
     
     # path('register/', UserRegistrationView.as_view(), name='register'),
@@ -30,6 +35,7 @@ urlpatterns = [
     # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('send-email/', SendEmailView.as_view(), name='send_email'),
+    path("register-send-otp/", newSendOTPView.as_view(), name="send_otp"),
     path("send-otp/", SendOTPView.as_view(), name="send_otp"),
     path("verify-otp/", VerifyOTPView.as_view(), name="verify_otp"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

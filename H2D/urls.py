@@ -11,13 +11,15 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger',
                                          cache_timeout=0), name='schema-swagger-ui'),
     
-    # Django admin interface
-    path('admin/', admin.site.urls),
+  
+    
     # path('adminlte/', include('admin_adminlte.urls')),
     # path("unfold-admin/", new_admin_site.urls),
     
     # User API endpoints (currently commented out)
-    path('', include('users.urls')),
+    path('api/', include('users.urls')),
+    path('admin/', admin.site.urls),
+    path('api/', include('file_storage.urls')),
     
     # JWT Authentication endpoints
     # Endpoint to obtain JWT token pair (access and refresh tokens)

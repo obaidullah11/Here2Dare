@@ -4192,3 +4192,154 @@ INFO 2025-01-30 09:58:46,060 basehttp 14076 5488 "GET / HTTP/1.1" 200 1577
 INFO 2025-01-30 09:58:46,254 basehttp 14076 5488 "GET /?format=openapi HTTP/1.1" 200 3796
 INFO 2025-01-30 09:59:04,428 autoreload 14076 16556 C:\Users\Obaidullah\Desktop\h2dlive\Here2Dare\H2D\settings.py changed, reloading.
 INFO 2025-01-30 09:59:05,294 autoreload 16576 18840 Watching for file changes with StatReloader
+INFO 2025-01-31 00:15:24,776 autoreload 17948 1564 Watching for file changes with StatReloader
+INFO 2025-01-31 00:15:54,725 autoreload 17948 1564 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\admin.py changed, reloading.
+INFO 2025-01-31 00:15:55,520 autoreload 20892 5484 Watching for file changes with StatReloader
+INFO 2025-01-31 00:16:07,412 autoreload 20892 5484 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\models.py changed, reloading.
+INFO 2025-01-31 00:16:08,201 autoreload 20616 15164 Watching for file changes with StatReloader
+INFO 2025-01-31 00:18:31,176 autoreload 12336 9464 Watching for file changes with StatReloader
+INFO 2025-01-31 00:18:33,835 basehttp 12336 8936 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 00:18:33,948 basehttp 12336 8936 "GET /?format=openapi HTTP/1.1" 200 3796
+INFO 2025-01-31 00:18:56,313 autoreload 12336 9464 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\admin.py changed, reloading.
+INFO 2025-01-31 00:18:57,106 autoreload 5284 17760 Watching for file changes with StatReloader
+INFO 2025-01-31 00:19:04,613 autoreload 5284 17760 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\admin.py changed, reloading.
+INFO 2025-01-31 00:19:05,345 autoreload 26024 21928 Watching for file changes with StatReloader
+INFO 2025-01-31 00:20:01,068 autoreload 26024 21928 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 00:20:01,848 autoreload 19128 19416 Watching for file changes with StatReloader
+INFO 2025-01-31 00:21:09,042 autoreload 19128 19416 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 00:21:09,795 autoreload 22180 18904 Watching for file changes with StatReloader
+INFO 2025-01-31 00:21:34,090 autoreload 22180 18904 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\serializers.py changed, reloading.
+INFO 2025-01-31 00:21:34,786 autoreload 25136 1452 Watching for file changes with StatReloader
+INFO 2025-01-31 00:21:37,759 basehttp 25136 27740 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 00:21:37,880 basehttp 25136 27740 "GET /?format=openapi HTTP/1.1" 200 3801
+INFO 2025-01-31 00:22:18,139 autoreload 25136 1452 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 00:22:18,907 autoreload 15488 6992 Watching for file changes with StatReloader
+INFO 2025-01-31 00:22:24,422 basehttp 15488 11240 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 00:22:24,495 basehttp 15488 11240 "GET /?format=openapi HTTP/1.1" 200 8636
+INFO 2025-01-31 00:23:12,533 autoreload 15488 6992 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\urls.py changed, reloading.
+INFO 2025-01-31 00:23:13,313 autoreload 17668 15744 Watching for file changes with StatReloader
+INFO 2025-01-31 00:23:16,783 basehttp 17668 12224 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 00:23:16,909 basehttp 17668 12224 "GET /static/drf-yasg/style.css HTTP/1.1" 200 1047
+INFO 2025-01-31 00:23:16,911 basehttp 17668 12224 "GET /static/drf-yasg/swagger-ui-init.js HTTP/1.1" 200 14964
+INFO 2025-01-31 00:23:16,923 basehttp 17668 13028 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui.css HTTP/1.1" 200 145206
+INFO 2025-01-31 00:23:16,929 basehttp 17668 23292 "GET /static/drf-yasg/insQ.min.js HTTP/1.1" 200 2093
+INFO 2025-01-31 00:23:16,932 basehttp 17668 2020 "GET /static/drf-yasg/immutable.min.js HTTP/1.1" 200 56904
+INFO 2025-01-31 00:23:16,934 basehttp 17668 18936 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js HTTP/1.1" 200 322863
+INFO 2025-01-31 00:23:16,939 basehttp 17668 25068 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js HTTP/1.1" 200 1046583
+INFO 2025-01-31 00:23:17,010 basehttp 17668 25068 "GET /?format=openapi HTTP/1.1" 200 9496
+INFO 2025-01-31 00:23:17,011 basehttp 17668 18936 "GET /static/drf-yasg/swagger-ui-dist/favicon-32x32.png HTTP/1.1" 200 628
+INFO 2025-01-31 00:23:32,699 basehttp 17668 27104 "POST /api/register/ HTTP/1.1" 201 1661
+INFO 2025-01-31 00:24:18,049 basehttp 17668 18936 "GET /api/validate-token/ HTTP/1.1" 200 111
+WARNING 2025-01-31 00:24:31,909 log 17668 27104 Bad Request: /api/register/
+WARNING 2025-01-31 00:24:31,910 basehttp 17668 27104 "POST /api/register/ HTTP/1.1" 400 140
+INFO 2025-01-31 09:38:05,616 autoreload 20360 17768 Watching for file changes with StatReloader
+INFO 2025-01-31 09:38:53,847 basehttp 20360 9484 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 09:38:54,096 basehttp 20360 9484 "GET /?format=openapi HTTP/1.1" 200 9496
+INFO 2025-01-31 09:40:05,545 autoreload 20360 17768 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 09:40:06,360 autoreload 13624 8828 Watching for file changes with StatReloader
+INFO 2025-01-31 09:40:08,812 basehttp 13624 10836 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 09:40:08,945 basehttp 13624 10836 "GET /?format=openapi HTTP/1.1" 200 9495
+INFO 2025-01-31 09:45:04,966 autoreload 13624 8828 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 09:45:05,768 autoreload 15732 10896 Watching for file changes with StatReloader
+INFO 2025-01-31 09:45:45,887 autoreload 15732 10896 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 09:45:46,600 autoreload 14236 4932 Watching for file changes with StatReloader
+INFO 2025-01-31 09:46:04,811 autoreload 14236 4932 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\urls.py changed, reloading.
+INFO 2025-01-31 09:46:05,580 autoreload 11544 8672 Watching for file changes with StatReloader
+INFO 2025-01-31 09:46:07,556 basehttp 11544 18060 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 09:46:07,679 basehttp 11544 18060 "GET /?format=openapi HTTP/1.1" 200 9936
+ERROR 2025-01-31 09:47:19,882 log 11544 18060 Internal Server Error: /api/register-send-otp/
+Traceback (most recent call last):
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py", line 310, in post
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Obaidullah\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\conf\__init__.py", line 91, in __getattr__
+    val = getattr(_wrapped, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Settings' object has no attribute 'TWILIO_ACCOUNT_SID'
+ERROR 2025-01-31 09:47:19,888 basehttp 11544 18060 "POST /api/register-send-otp/ HTTP/1.1" 500 23183
+INFO 2025-01-31 09:49:00,322 autoreload 11544 8672 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\settings.py changed, reloading.
+INFO 2025-01-31 09:49:01,181 autoreload 20324 18992 Watching for file changes with StatReloader
+INFO 2025-01-31 09:49:57,721 basehttp 20324 8112 "POST /api/register-send-otp/ HTTP/1.1" 200 51
+INFO 2025-01-31 09:52:04,716 basehttp 20324 8112 "GET / HTTP/1.1" 200 1577
+INFO 2025-01-31 09:52:04,841 basehttp 20324 8112 "GET /?format=openapi HTTP/1.1" 200 9936
+INFO 2025-01-31 09:52:07,469 basehttp 20324 8112 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-01-31 09:52:07,501 basehttp 20324 8112 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3079
+INFO 2025-01-31 09:52:07,518 basehttp 20324 8112 "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:07,518 basehttp 20324 15580 "GET /static/vendor/adminlte/css/adminlte.min.css HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:07,523 basehttp 20324 10520 "GET /static/jazzmin/css/main.css HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:07,547 basehttp 20324 10520 "GET /static/vendor/adminlte/img/AdminLTELogo.png HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:07,547 basehttp 20324 15580 "GET /static/vendor/bootstrap/js/bootstrap.min.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:07,588 basehttp 20324 10520 "GET /static/vendor/adminlte/js/adminlte.min.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:07,674 basehttp 20324 10520 "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:12,391 basehttp 20324 10520 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-01-31 09:52:12,618 basehttp 20324 10520 "GET /admin/ HTTP/1.1" 200 14016
+INFO 2025-01-31 09:52:12,649 basehttp 20324 10520 "GET /static/jazzmin/js/main.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:12,665 basehttp 20324 10520 "GET /static/vendor/fontawesome-free/webfonts/fa-regular-400.woff2 HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:19,029 basehttp 20324 10520 "GET /admin/users/user/ HTTP/1.1" 200 23107
+INFO 2025-01-31 09:52:19,072 basehttp 20324 10520 "GET /static/vendor/select2/css/select2.min.css HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:19,120 basehttp 20324 15580 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-01-31 09:52:19,135 basehttp 20324 10520 "GET /static/jazzmin/js/change_list.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:19,136 basehttp 20324 15580 "GET /static/vendor/select2/js/select2.min.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:19,320 basehttp 20324 10988 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-01-31 09:52:19,328 basehttp 20324 8112 "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO 2025-01-31 09:52:31,565 basehttp 20324 8112 "GET /admin/users/user/183719/change/ HTTP/1.1" 200 51130
+INFO 2025-01-31 09:52:31,590 basehttp 20324 10988 "GET /static/jazzmin/js/change_form.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:31,590 basehttp 20324 15580 "GET /static/jazzmin/plugins/bootstrap-show-modal/bootstrap-show-modal.min.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:31,594 basehttp 20324 8112 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-01-31 09:52:31,595 basehttp 20324 15580 "GET /static/jazzmin/js/related-modal.js HTTP/1.1" 304 0
+INFO 2025-01-31 09:52:38,530 basehttp 20324 15580 "POST /admin/users/user/183719/change/ HTTP/1.1" 302 0
+INFO 2025-01-31 09:52:38,569 basehttp 20324 15580 "GET /admin/users/user/ HTTP/1.1" 200 23714
+INFO 2025-01-31 09:52:38,589 basehttp 20324 15580 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-01-31 09:52:43,060 basehttp 20324 15580 "POST /api/register-send-otp/ HTTP/1.1" 200 51
+INFO 2025-01-31 09:54:31,836 basehttp 20324 15580 "GET /admin/users/user/183719/change/ HTTP/1.1" 200 51242
+INFO 2025-01-31 09:54:31,928 basehttp 20324 15580 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-01-31 09:54:36,625 basehttp 20324 15580 "POST /admin/users/user/183719/change/ HTTP/1.1" 302 0
+INFO 2025-01-31 09:54:36,686 basehttp 20324 15580 "GET /admin/users/user/ HTTP/1.1" 200 23716
+INFO 2025-01-31 09:54:36,748 basehttp 20324 15580 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-01-31 09:54:40,062 log 20324 15580 Bad Request: /api/register-send-otp/
+WARNING 2025-01-31 09:54:40,064 basehttp 20324 15580 "POST /api/register-send-otp/ HTTP/1.1" 400 34
+INFO 2025-01-31 09:56:11,603 autoreload 20324 18992 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 09:56:13,047 autoreload 10464 5476 Watching for file changes with StatReloader
+INFO 2025-01-31 09:56:31,348 autoreload 10464 5476 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 09:56:32,094 autoreload 18172 20068 Watching for file changes with StatReloader
+ERROR 2025-01-31 09:56:51,020 log 18172 19732 Internal Server Error: /api/register-send-otp/
+ERROR 2025-01-31 09:56:51,023 basehttp 18172 19732 "POST /api/register-send-otp/ HTTP/1.1" 500 517
+INFO 2025-01-31 10:00:52,399 autoreload 18172 20068 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 10:00:53,318 autoreload 10928 22432 Watching for file changes with StatReloader
+INFO 2025-01-31 10:03:09,995 autoreload 10928 22432 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\settings.py changed, reloading.
+INFO 2025-01-31 10:03:10,775 autoreload 11820 2928 Watching for file changes with StatReloader
+INFO 2025-01-31 10:03:18,368 autoreload 11820 2928 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\settings.py changed, reloading.
+INFO 2025-01-31 10:03:19,140 autoreload 11776 3188 Watching for file changes with StatReloader
+INFO 2025-01-31 10:03:31,873 autoreload 16352 904 Watching for file changes with StatReloader
+INFO 2025-01-31 10:04:12,707 autoreload 16352 904 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\users\views.py changed, reloading.
+INFO 2025-01-31 10:04:13,409 autoreload 4628 7980 Watching for file changes with StatReloader
+INFO 2025-01-31 10:04:29,019 basehttp 4628 10924 "POST /api/register-send-otp/ HTTP/1.1" 200 51
+INFO 2025-01-31 10:05:11,215 basehttp 4628 10924 "POST /api/verify-otp/ HTTP/1.1" 200 40
+INFO 2025-01-31 10:05:49,278 basehttp 4628 10924 "POST /api/register-send-otp/ HTTP/1.1" 200 51
+WARNING 2025-01-31 10:06:04,061 log 4628 10924 Bad Request: /api/verify-otp/
+WARNING 2025-01-31 10:06:04,062 basehttp 4628 10924 "POST /api/verify-otp/ HTTP/1.1" 400 24
+INFO 2025-01-31 10:06:12,048 basehttp 4628 10924 "POST /api/verify-otp/ HTTP/1.1" 200 40
+INFO 2025-01-31 10:09:11,189 autoreload 4628 7980 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\settings.py changed, reloading.
+INFO 2025-01-31 10:09:12,034 autoreload 9212 11220 Watching for file changes with StatReloader

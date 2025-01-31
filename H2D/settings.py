@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users',
     'sslserver',
     'drf_yasg',
+    'file_storage',
     # 'admin_tools.stats',
     # 'admin_tools',
     # 'admin_tools_stats',  # Swagger/OpenAPI documentation
@@ -74,7 +75,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Add your frontend URL here
+    "http://127.0.0.1:8000",
+]
+CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'H2D.urls'
 
 TEMPLATES = [
