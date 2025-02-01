@@ -8,7 +8,7 @@ from django.utils.html import format_html
 # Customizing the UserAdmin to work with the custom User model
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ['id','email', 'full_name', 'phone_number', 'is_admin',  'is_email_verified', 'is_approved', 'created_at']
+    list_display = ['id','email',  'phone_number', 'is_admin',  'is_email_verified', 'is_approved', 'created_at']
     list_filter = ['is_admin',  'is_email_verified', 'is_approved', 'is_deleted']
     search_fields = ['email', 'username', 'phone_number']
     ordering = ['created_at']

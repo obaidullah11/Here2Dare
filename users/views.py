@@ -487,12 +487,96 @@ class UserProfileView(APIView):
 # api to update user record
 
 
+from rest_framework import serializers, viewsets, permissions
+from rest_framework.response import Response
+from rest_framework.decorators import action
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserProfileSerializerv2
+    permission_classes = [permissions.IsAuthenticated]
+    
+    @swagger_auto_schema(
+        method='patch',
+        request_body=UserProfileSerializerv2,
+        responses={200: UserProfileSerializerv2}
+    )
+    @action(detail=False, methods=['patch'], url_path='update-profile', permission_classes=[permissions.IsAuthenticated])
+    def update_profile(self, request):
+        user = request.user
+        serializer = UserProfileSerializerv2(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'success': True, 'message': 'User profile updated successfully', 'data': serializer.data}, status=200)
+        return Response({'success': False, 'errors': serializer.errors}, status=400)
+
+
+# social login for google apple and facebook
 
 
 
+class SocialLoginOrRegisterView(APIView):
 
+    @swagger_auto_schema(
+        operation_description="Register or log in a user via social sign-in.",
+        request_body=SocialRegistrationSerializer,
+        responses={
+            200: openapi.Response(
+                description="Successfully logged in or registered the user",
+                schema=SocialRegistrationSerializer
+            ),
+            400: openapi.Response(
+                description="Failed to register or log in the user",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                        'message': openapi.Schema(type=openapi.TYPE_STRING),
+                        'errors': openapi.Schema(type=openapi.TYPE_OBJECT)
+                    }
+                )
+            )
+        }
+    )
+    def post(self, request):
+        # Use the serializer to validate the incoming data
+        serializer = SocialRegistrationSerializer(data=request.data)
 
+        if serializer.is_valid():
+            # Save the user or update if exists
+            user = serializer.save()
 
+            # If the user doesn't have an ID, retrieve by email (for social login)
+            if not user.id:
+                email = request.data.get('email')  # Get email from request
+                user_by_email = get_object_or_404(User, email=email)
+                user = user_by_email  # Use the user retrieved by email
+
+            # Generate JWT token for the user
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+
+            # Determine whether the user is new or existing
+            if user.pk:  # If user exists (logged in)
+                message = 'User logged in successfully.'
+            else:  # If user is newly created (registered)
+                message = 'User registered successfully.'
+
+            return Response({
+                'success': True,
+                'message': message,
+                'data': {
+                    'refresh': str(refresh),
+                    'access': access_token,
+                    'id': user.id,
+                    'user': serializer.data
+                }
+            }, status=status.HTTP_200_OK)
+
+        return Response({
+            'success': False,
+            'message': 'Failed to register or log in user.',
+            'errors': serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -605,6 +689,13 @@ class SendEmailView(GenericAPIView):
 #
 
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import RegisterUserSerializer, UserProfileSerializer
+
+
 class RegisterUserView(APIView):
     """
     API endpoint for user registration and JWT validation.
@@ -632,50 +723,12 @@ class RegisterUserView(APIView):
                             type=openapi.TYPE_OBJECT,
                             properties={
                                 'id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                                'full_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                'username': openapi.Schema(type=openapi.TYPE_STRING),
                                 'first_name': openapi.Schema(type=openapi.TYPE_STRING),
                                 'last_name': openapi.Schema(type=openapi.TYPE_STRING),
-                                'phone_number': openapi.Schema(type=openapi.TYPE_STRING),
-                                'full_number': openapi.Schema(type=openapi.TYPE_STRING),
                                 'email': openapi.Schema(type=openapi.TYPE_STRING),
-                                'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'is_approved': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'is_deleted': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'is_mute': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'is_stripe_connect': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'device_type': openapi.Schema(type=openapi.TYPE_STRING),
-                                'device_token': openapi.Schema(type=openapi.TYPE_STRING),
-                                'country_code': openapi.Schema(type=openapi.TYPE_STRING),
-                                'country_iso': openapi.Schema(type=openapi.TYPE_STRING),
-                                'country': openapi.Schema(type=openapi.TYPE_STRING),
-                                'city': openapi.Schema(type=openapi.TYPE_STRING),
-                                'state': openapi.Schema(type=openapi.TYPE_STRING),
-                                'postal_code': openapi.Schema(type=openapi.TYPE_STRING),
-                                'address': openapi.Schema(type=openapi.TYPE_STRING),
-                                'bio': openapi.Schema(type=openapi.TYPE_STRING),
-                                'badge': openapi.Schema(type=openapi.TYPE_STRING),
-                                'user_type': openapi.Schema(type=openapi.TYPE_STRING),
+                                'phone_number': openapi.Schema(type=openapi.TYPE_STRING),
                                 'profile_pic_url': openapi.Schema(type=openapi.TYPE_STRING),
-                                'location': openapi.Schema(type=openapi.TYPE_STRING),
-                                'default_location': openapi.Schema(type=openapi.TYPE_STRING),
-                                'total_number_of_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-                                'average_rating': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                'total_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-                                'driver_total_number_of_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-                                'driver_average_rating': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                'driver_total_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-                                'document_uploaded': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'access_token': openapi.Schema(type=openapi.TYPE_STRING),
-                                'setting_applied': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'discovery_radius': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                'no_delivery': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                                'recent_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-                                'nearest_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-                                'highest_earning_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-                                'least_earning_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-                                'filter_type': openapi.Schema(type=openapi.TYPE_STRING),
-                                'email_id': openapi.Schema(type=openapi.TYPE_STRING),
                                 'created_at': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DATETIME),
                                 'updated_at': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DATETIME),
                             }
@@ -691,18 +744,7 @@ class RegisterUserView(APIView):
         """Register a new user and generate JWT tokens."""
         serializer = RegisterUserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-
-            # Retrieve the user from the database using email
-            email = serializer.validated_data.get("email")
-            user = User.objects.filter(email=email).first()
-
-            if user is None:
-                print("❌ Error: User not found after creation!")  # Debugging print
-                return Response({
-                    "success": False,
-                    "message": "User creation failed"
-                }, status=status.HTTP_400_BAD_REQUEST)
+            user = serializer.save()
 
             # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
@@ -710,8 +752,6 @@ class RegisterUserView(APIView):
 
             # Serialize the user profile
             user_data = UserProfileSerializer(user).data
-
-            print(f"✅ User registered: ID={user.id}, Email={user.email}")  # Debugging print
 
             return Response({
                 "success": True,
@@ -723,11 +763,134 @@ class RegisterUserView(APIView):
                 "user": user_data  # Include serialized user data here
             }, status=status.HTTP_201_CREATED)
 
-        print(f"❌ Registration failed: {serializer.errors}")  # Debugging print
         return Response({
             "success": False,
             "errors": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+
+# class RegisterUserView(APIView):
+#     """
+#     API endpoint for user registration and JWT validation.
+#     """
+
+#     @swagger_auto_schema(
+#         operation_description="Register a new user",
+#         request_body=RegisterUserSerializer,
+#         responses={
+#             201: openapi.Response(
+#                 "User successfully registered",
+#                 openapi.Schema(
+#                     type=openapi.TYPE_OBJECT,
+#                     properties={
+#                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                         'message': openapi.Schema(type=openapi.TYPE_STRING),
+#                         'tokens': openapi.Schema(
+#                             type=openapi.TYPE_OBJECT,
+#                             properties={
+#                                 'refresh': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'access': openapi.Schema(type=openapi.TYPE_STRING)
+#                             }
+#                         ),
+#                         'user': openapi.Schema(
+#                             type=openapi.TYPE_OBJECT,
+#                             properties={
+#                                 'id': openapi.Schema(type=openapi.TYPE_INTEGER),
+#                                 'full_name': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'phone_number': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'full_number': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'email': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'is_approved': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'is_deleted': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'is_mute': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'is_stripe_connect': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'device_type': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'device_token': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'country_code': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'country_iso': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'country': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'city': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'state': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'postal_code': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'address': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'bio': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'badge': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'user_type': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'profile_pic_url': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'location': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'default_location': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'total_number_of_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
+#                                 'average_rating': openapi.Schema(type=openapi.TYPE_NUMBER),
+#                                 'total_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
+#                                 'driver_total_number_of_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
+#                                 'driver_average_rating': openapi.Schema(type=openapi.TYPE_NUMBER),
+#                                 'driver_total_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
+#                                 'document_uploaded': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'access_token': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'setting_applied': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'discovery_radius': openapi.Schema(type=openapi.TYPE_NUMBER),
+#                                 'no_delivery': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                                 'recent_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
+#                                 'nearest_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
+#                                 'highest_earning_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
+#                                 'least_earning_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
+#                                 'filter_type': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'email_id': openapi.Schema(type=openapi.TYPE_STRING),
+#                                 'created_at': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DATETIME),
+#                                 'updated_at': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DATETIME),
+#                             }
+#                         ),
+#                     }
+#                 )
+#             ),
+#             400: openapi.Response("Bad request, validation errors"),
+#         },
+#         tags=['Signup Flow']
+#     )
+#     def post(self, request):
+#         """Register a new user and generate JWT tokens."""
+#         serializer = RegisterUserSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+
+#             # Retrieve the user from the database using email
+#             email = serializer.validated_data.get("email")
+#             user = User.objects.filter(email=email).first()
+
+#             if user is None:
+#                 print("❌ Error: User not found after creation!")  # Debugging print
+#                 return Response({
+#                     "success": False,
+#                     "message": "User creation failed"
+#                 }, status=status.HTTP_400_BAD_REQUEST)
+
+#             # Generate JWT tokens
+#             refresh = RefreshToken.for_user(user)
+#             access_token = str(refresh.access_token)
+
+#             # Serialize the user profile
+#             user_data = UserProfileSerializer(user).data
+
+#             print(f"✅ User registered: ID={user.id}, Email={user.email}")  # Debugging print
+
+#             return Response({
+#                 "success": True,
+#                 "message": "User registered successfully",
+#                 "tokens": {
+#                     "refresh": str(refresh),
+#                     "access": access_token
+#                 },
+#                 "user": user_data  # Include serialized user data here
+#             }, status=status.HTTP_201_CREATED)
+
+#         print(f"❌ Registration failed: {serializer.errors}")  # Debugging print
+#         return Response({
+#             "success": False,
+#             "errors": serializer.errors
+#         }, status=status.HTTP_400_BAD_REQUEST)
 
 class ValidateJWTView(APIView):
     """
@@ -798,24 +961,116 @@ class ValidateJWTView(APIView):
 
 
 
+# class SocialLoginOrRegisterView(APIView):
+
+#     @swagger_auto_schema(
+#         operation_description="Register or log in a user via social sign-in.",
+#         request_body=SocialRegistrationSerializer,
+#         responses={
+#             200: openapi.Response(
+#                 description="Successfully logged in or registered the user",
+#                 schema=SocialRegistrationSerializer
+#             ),
+#             400: openapi.Response(
+#                 description="Failed to register or log in the user",
+#                 schema=openapi.Schema(
+#                     type=openapi.TYPE_OBJECT,
+#                     properties={
+#                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+#                         'message': openapi.Schema(type=openapi.TYPE_STRING),
+#                         'errors': openapi.Schema(type=openapi.TYPE_OBJECT)
+#                     }
+#                 )
+#             )
+#         }
+#     )
+#     def post(self, request):
+#         # Use the serializer to validate the incoming data
+#         serializer = SocialRegistrationSerializer(data=request.data)
+
+#         if serializer.is_valid():
+#             # Save the user or update if exists
+#             user = serializer.save()
+
+#             # If the user doesn't have an ID, retrieve by email (for social login)
+#             if not user.id:
+#                 email = request.data.get('email')  # Get email from request
+#                 user_by_email = get_object_or_404(User, email=email)
+#                 user = user_by_email  # Use the user retrieved by email
+
+#             # Generate JWT token for the user
+#             refresh = RefreshToken.for_user(user)
+#             access_token = str(refresh.access_token)
+
+#             # Determine whether the user is new or existing
+#             if user.pk:  # If user exists (logged in)
+#                 message = 'User logged in successfully.'
+#             else:  # If user is newly created (registered)
+#                 message = 'User registered successfully.'
+
+#             return Response({
+#                 'success': True,
+#                 'message': message,
+#                 'data': {
+#                     'refresh': str(refresh),
+#                     'access': access_token,
+#                     'id': user.id,
+#                     'user': serializer.data
+#                 }
+#             }, status=status.HTTP_200_OK)
+
+#         return Response({
+#             'success': False,
+#             'message': 'Failed to register or log in user.',
+#             'errors': serializer.errors
+#         }, status=status.HTTP_400_BAD_REQUEST)
+
 
 class SocialLoginOrRegisterView(APIView):
+
+    @swagger_auto_schema(
+        operation_description="Register or log in a user via social sign-in.",
+        request_body=SocialRegistrationSerializer,
+        responses={
+            200: openapi.Response(
+                description="Successfully logged in or registered the user",
+                schema=SocialRegistrationSerializer
+            ),
+            400: openapi.Response(
+                description="Failed to register or log in the user",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                        'message': openapi.Schema(type=openapi.TYPE_STRING),
+                        'errors': openapi.Schema(type=openapi.TYPE_OBJECT)
+                    }
+                )
+            )
+        }
+    )
     def post(self, request):
+        # Use the serializer to validate the incoming data
         serializer = SocialRegistrationSerializer(data=request.data)
 
         if serializer.is_valid():
-            user = serializer.save()
-            if not user.id:
-                # If the user doesn't have an ID, retrieve by email
-                email = request.data.get('email')  # Get email from request
-                user_by_email = get_object_or_404(User, email=email)
-                user = user_by_email  # Use the user retrieved by email
+            # Check if the user exists based on the email (for social login)
+            email = request.data.get('email')
+            user = User.objects.filter(email=email).first()
 
-            # Generate JWT token
+            if user:
+                # If the user exists, update the user's social information if necessary
+                # You can add a field here to update the social provider or other details if needed
+                pass
+            else:
+                # Save the user (new registration)
+                user = serializer.save()
+
+            # Generate JWT token for the user
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
 
-            # Determine if the user was newly created or logged in
+            # Determine whether the user is new or existing
             if user.pk:  # If user exists (logged in)
                 message = 'User logged in successfully.'
             else:  # If user is newly created (registered)
@@ -837,5 +1092,3 @@ class SocialLoginOrRegisterView(APIView):
             'message': 'Failed to register or log in user.',
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
-

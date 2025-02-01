@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'H2D.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'django',
+        'NAME': BASE_DIR / 'h2ddb',
     }
 }
 

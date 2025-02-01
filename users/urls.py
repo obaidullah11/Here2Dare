@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from users.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 # from . views import *
-
+user_profile_update = UserProfileViewSet.as_view({'patch': 'update_profile'})
 urlpatterns = [
 
 
@@ -36,6 +36,8 @@ urlpatterns = [
     # path("update-password/", UpdatePasswordViewnew.as_view(), name="update-password"),
     # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('social-sign-in/', SocialLoginOrRegisterView.as_view(), name='social-sign-in'),
+    path('users/update-profile/', user_profile_update, name='update-profile'),
     path('send-email/', SendEmailView.as_view(), name='send_email'),
     path("register-send-otp/", newSendOTPView.as_view(), name="send_otp"),
     path("send-otp/", SendOTPView.as_view(), name="send_otp"),

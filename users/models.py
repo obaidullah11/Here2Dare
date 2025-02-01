@@ -15,17 +15,46 @@ class CustomUserIDField(models.CharField):
 class MyUserManager(BaseUserManager):
     def create_user(self, email, phone_number, username=None, password=None, **extra_fields):
         if not email:
+            print("Error: Email must be set.")
             raise ValueError('The Email field must be set')
         if not phone_number:
+            print("Error: Phone number must be set.")
             raise ValueError('The Phone Number field must be set')
 
+        print(f"Normalizing email: {email}")
         email = self.normalize_email(email)
+
         if not username:
+            print("No username provided, using email as username.")
             username = email  # Set username to email if not provided
+
+        # Check if email already exists
+        if self.model.objects.filter(email=email).exists():
+            print(f"Error: The email '{email}' is already in use.")
+            raise ValueError(f"The email '{email}' is already in use.")
+
+        # Check if phone number already exists
+        if self.model.objects.filter(phone_number=phone_number).exists():
+            print(f"Error: The phone number '{phone_number}' is already in use.")
+            raise ValueError(f"The phone number '{phone_number}' is already in use.")
+
+        # Printing out the extra fields to ensure they are passed correctly
+        print(f"Creating user with email: {email}, phone number: {phone_number}, username: {username}")
+        
+        # Create the user instance
         user = self.model(email=email, phone_number=phone_number, username=username, **extra_fields)
+        
+        # Set the password
+        print(f"Setting password for user: {username}")
         user.set_password(password)
+        
+        # Save the user
+        print(f"Saving user {username} to the database.")
         user.save(using=self._db)
+
+        print(f"User {username} created successfully.")
         return user
+
 
     def create_superuser(self, email, phone_number, username=None, password=None, **extra_fields):
         extra_fields.setdefault('is_admin', True)
@@ -39,8 +68,8 @@ class MyUserManager(BaseUserManager):
         return self.create_user(email, phone_number, username, password, **extra_fields)
 
 class User(AbstractUser):
-    id = CustomUserIDField(primary_key=True, max_length=6, editable=False)  # Using CustomUserIDField
-    full_name = models.CharField(max_length=150, blank=True, null=True)
+    id = CustomUserIDField(primary_key=True, max_length=6, editable=False)
+    username = models.CharField(max_length=150, unique=True, blank=True, null=True)  # Replacing username with username
     first_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
@@ -48,7 +77,6 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, blank=True, null=True)
     is_admin = models.BooleanField(default=False, null=True)
     is_email_verified = models.BooleanField(default=False, null=True)
-    # is_verified = models.BooleanField(default=False, null=True)
     is_approved = models.BooleanField(default=False, null=True)
     is_deleted = models.BooleanField(default=False, null=True)
     is_mute = models.BooleanField(default=False, null=True)
@@ -89,23 +117,23 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True, null=True)
     
     objects = MyUserManager()
-    
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['phone_number']
-    
+
     def __str__(self):
         return self.email
-    
+
     def has_perm(self, perm, obj=None):
         return self.is_admin
-    
+
     def has_module_perms(self, app_label):
         return True
-    
+
     @property
     def is_staff(self):
         return self.is_admin
-    
+
     def get_jwt_token(self):
         """
         Generates a JWT token for the user.
@@ -115,7 +143,7 @@ class User(AbstractUser):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }
-    
+
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
@@ -131,8 +159,9 @@ class DocumentVerification(models.Model):
     
     
     def __str__(self):
-        return f"{self.user.full_name} - Document Verification"
+        return f"{self.user.username} - Document Verification"
 
     class Meta:
         verbose_name = "Document Verification"
         verbose_name_plural = "Document Verifications"
+
