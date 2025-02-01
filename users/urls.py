@@ -15,6 +15,7 @@ urlpatterns = [
     path('check-Phonenumber/', CheckPhoneNumberView.as_view(), name='check_email'),
     path("login/", PhoneLoginAPIView.as_view(), name="phone_login"),
     path("getuserprofile/", UserProfileView.as_view(), name="UserProfileView"),
+    path('password_reset/', ResetPasswordAPIView.as_view(), name='password_reset'),
     # path("updateuserprofile/", UpdateUserProfileView.as_view(), name="UserProfileView"),
     # path('register/', UserRegistrationView.as_view(), name='register'),
     # path('login/', UserLoginView.as_view(), name='login'),

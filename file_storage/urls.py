@@ -10,4 +10,8 @@ urlpatterns = [
 path('create_file_url/', FileUploadView.as_view(), name='upload_file'),
 path('getfileurl/', FileListView.as_view(), name='list_files'),
     
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    print("Serving media files in development mode")
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

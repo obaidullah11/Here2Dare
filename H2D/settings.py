@@ -187,9 +187,11 @@ TIME_ZONE = "Asia/Karachi"
 USE_I18N = True
 USE_TZ = True
 
-# Media files configuration (user-uploaded files)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# # Media files configuration (user-uploaded files)
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

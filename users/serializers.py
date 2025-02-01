@@ -146,7 +146,9 @@ class VerifyOTPSerializer(serializers.Serializer):
 
 
 
-
+class ResetPasswordSerializer(serializers.Serializer):
+    phone_number = serializers.CharField(max_length=15)
+    new_password = serializers.CharField(min_length=6)
 
 
 # class RegisterUserSerializer(serializers.ModelSerializer):
@@ -369,18 +371,29 @@ class SocialRegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """
         Create a new user or update the existing user based on email.
-        If no username is provided, email will be used as the username.
+        If no username is provided, concatenate first_name and last_name to form the username.
         """
         email = validated_data.get('email')
-        first_name = validated_data.get('first_name', '')
-        last_name = validated_data.get('last_name', '')
+        first_name = validated_data.get('first_name', '').strip()
+        last_name = validated_data.get('last_name', '').strip()
         profile_pic_url = validated_data.get('profile_pic_url', '')
+
+        # Generate a base username by concatenating first_name and last_name
+        base_username = f"{first_name}{last_name}".lower() if first_name or last_name else email.split('@')[0]
+
+        # Ensure the username is unique
+        username = base_username
+        counter = 1
+        while User.objects.filter(username=username).exists():
+            username = f"{base_username}{counter}"
+            counter += 1
 
         # Check if the user already exists by email
         user, created = User.objects.get_or_create(email=email, defaults={
             'first_name': first_name,
             'last_name': last_name,
-            'profile_pic_url': profile_pic_url
+            'profile_pic_url': profile_pic_url,
+            'username': username
         })
 
         # If user already exists, update the fields
@@ -396,9 +409,6 @@ class SocialRegistrationSerializer(serializers.ModelSerializer):
             user.save()
 
         return user
-
-
-
 
 
 

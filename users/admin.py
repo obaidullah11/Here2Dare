@@ -6,14 +6,19 @@ from .models import DocumentVerification
 from django.utils.html import format_html
 
 # Customizing the UserAdmin to work with the custom User model
+from django.utils.html import format_html
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import User  # Ensure you import your User model
+
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ['id','email',  'phone_number', 'is_admin',  'is_email_verified', 'is_approved', 'created_at']
-    list_filter = ['is_admin',  'is_email_verified', 'is_approved', 'is_deleted']
+    list_display = ['id', 'email', 'phone_number', 'profile_pic_preview', 'is_admin', 'is_email_verified', 'is_approved', 'created_at']
+    list_filter = ['is_admin', 'is_email_verified', 'is_approved', 'is_deleted']
     search_fields = ['email', 'username', 'phone_number']
     ordering = ['created_at']
     readonly_fields = ('id', 'created_at', 'updated_at')
-    
+
     fieldsets = (
         (None, {
             'fields': ('email', 'password')
@@ -22,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('full_name', 'phone_number', 'username', 'bio', 'profile_pic_url', 'location', 'address')
         }),
         ('Permissions', {
-            'fields': ('is_admin',  'is_email_verified', 'is_approved', 'is_deleted', 'is_mute')
+            'fields': ('is_admin', 'is_email_verified', 'is_approved', 'is_deleted', 'is_mute')
         }),
         ('Advanced settings', {
             'fields': ('user_type', 'device_type', 'device_token', 'country_code', 'country_iso', 'city', 'state', 'postal_code', 'badge')
@@ -37,13 +42,22 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('created_at', 'updated_at')
         })
     )
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'phone_number', 'password1', 'password2', 'is_admin',  'is_email_verified')
+            'fields': ('email', 'phone_number', 'password1', 'password2', 'is_admin', 'is_email_verified')
         }),
     )
-    
+
+    def profile_pic_preview(self, obj):
+        """Display profile picture preview in admin panel"""
+        if obj.profile_pic_url:
+            return format_html('<img src="{}" style="width: 50px; height: 50px; border-radius: 50%;" />', obj.profile_pic_url)
+        return "No Image"
+
+    profile_pic_preview.short_description = 'Profile Picture'
+
     # Making sure password is required
     def save_model(self, request, obj, form, change):
         if not obj.password:
@@ -52,6 +66,7 @@ class CustomUserAdmin(UserAdmin):
 
 # Registering the custom User model with the custom UserAdmin
 admin.site.register(User, CustomUserAdmin)
+
 
 
 

@@ -70,7 +70,8 @@ class FileUploadView(APIView):
                 uploaded_file_instance.save()
 
                 # Build the full URL (base URL + media URL)
-                absolute_url = request.build_absolute_uri(file_url)
+                # absolute_url = request.build_absolute_uri(file_url)
+                absolute_url = request.build_absolute_uri(settings.MEDIA_URL + file_name)
 
                 return Response({
                     "success": True,

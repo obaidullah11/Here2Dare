@@ -439,6 +439,56 @@ class PhoneLoginAPIView(APIView):
             }
         }, status=status.HTTP_200_OK)
 
+#api to reset password
+
+
+
+
+class ResetPasswordAPIView(APIView):
+    """
+    API endpoint for resetting the password using phone number.
+    """
+
+    @swagger_auto_schema(
+        operation_description="Reset the password for a user by phone number. Provide the phone number and new password.",
+        operation_summary="Reset Password by Phone Number",
+        request_body=ResetPasswordSerializer,
+        responses={
+            200: "Password has been successfully reset.",
+            400: "Invalid phone number or password.",
+        },
+        tags=['Authentication']
+    )
+    def post(self, request, *args, **kwargs):
+        serializer = ResetPasswordSerializer(data=request.data)
+
+        if serializer.is_valid():
+            phone_number = serializer.validated_data['phone_number']
+            new_password = serializer.validated_data['new_password']
+
+            # Check if the user exists with the provided phone number
+            user = get_user_model().objects.filter(phone_number=phone_number).first()
+
+            if not user:
+                return Response({
+                    'success': False,
+                    'message': 'User not found with this phone number'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Reset the password
+            user.set_password(new_password)
+            user.save()
+
+            return Response({
+                'success': True,
+                'message': 'Password has been successfully reset'
+            }, status=status.HTTP_200_OK)
+
+        return Response({
+            'success': False,
+            'message': 'Invalid data',
+            'data': serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -744,11 +794,21 @@ class RegisterUserView(APIView):
         """Register a new user and generate JWT tokens."""
         serializer = RegisterUserSerializer(data=request.data)
         if serializer.is_valid():
-            user = serializer.save()
+            serializer.save()
+            email = serializer.validated_data.get("email")
+            user = User.objects.filter(email=email).first()
+
+            if user is None:
+                print("❌ Error: User not found after creation!")  # Debugging print
+                return Response({
+                    "success": False,
+                    "message": "User creation failed"
+                }, status=status.HTTP_400_BAD_REQUEST)
 
             # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
+
 
             # Serialize the user profile
             user_data = UserProfileSerializer(user).data
@@ -1025,7 +1085,6 @@ class ValidateJWTView(APIView):
 #             'errors': serializer.errors
 #         }, status=status.HTTP_400_BAD_REQUEST)
 
-
 class SocialLoginOrRegisterView(APIView):
 
     @swagger_auto_schema(
@@ -1050,45 +1109,37 @@ class SocialLoginOrRegisterView(APIView):
         }
     )
     def post(self, request):
-        # Use the serializer to validate the incoming data
-        serializer = SocialRegistrationSerializer(data=request.data)
+        """Handle social login or user registration."""
+        email = request.data.get("email")
+        user = User.objects.filter(email=email).first()
 
-        if serializer.is_valid():
-            # Check if the user exists based on the email (for social login)
-            email = request.data.get('email')
-            user = User.objects.filter(email=email).first()
-
-            if user:
-                # If the user exists, update the user's social information if necessary
-                # You can add a field here to update the social provider or other details if needed
-                pass
-            else:
-                # Save the user (new registration)
+        if user:
+            # User already exists, proceed to log them in
+            message = "User logged in successfully."
+        else:
+            # User does not exist, proceed to register
+            serializer = SocialRegistrationSerializer(data=request.data)
+            if serializer.is_valid():
                 user = serializer.save()
+                message = "User registered successfully."
+            else:
+                return Response({
+                    "success": False,
+                    "message": "Failed to register user.",
+                    "errors": serializer.errors
+                }, status=status.HTTP_400_BAD_REQUEST)
 
-            # Generate JWT token for the user
-            refresh = RefreshToken.for_user(user)
-            access_token = str(refresh.access_token)
-
-            # Determine whether the user is new or existing
-            if user.pk:  # If user exists (logged in)
-                message = 'User logged in successfully.'
-            else:  # If user is newly created (registered)
-                message = 'User registered successfully.'
-
-            return Response({
-                'success': True,
-                'message': message,
-                'data': {
-                    'refresh': str(refresh),
-                    'access': access_token,
-                    'id': user.id,
-                    'user': serializer.data
-                }
-            }, status=status.HTTP_200_OK)
+        # Generate JWT tokens
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
 
         return Response({
-            'success': False,
-            'message': 'Failed to register or log in user.',
-            'errors': serializer.errors
-        }, status=status.HTTP_400_BAD_REQUEST)
+            'success': True,
+            'message': message,
+            'data': {
+                'refresh': str(refresh),
+                'access': access_token,
+                'id': user.id,
+                'user': UserProfileSerializer(user).data  # Serialize user profile
+            }
+        }, status=status.HTTP_200_OK)
