@@ -47,7 +47,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 User = get_user_model()
-
+# api to upload docoment
 
 class FileUploadnView(APIView):
     permission_classes = [IsAuthenticated]  # Ensure user is authenticated via JWT
@@ -134,7 +134,7 @@ class FileUploadnView(APIView):
             'message': 'File upload failed.',
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
+# api to check mail is availible or not
 class CheckEmailView(APIView):
     """
     API endpoint to check if an email is already registered.
@@ -174,44 +174,7 @@ class CheckEmailView(APIView):
         else:
             return Response({'success': True, 'message': 'Email is available', 'exists': False}, status=status.HTTP_200_OK)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#api to send otp
 OTP_STORAGE = {}
 
 class newSendOTPView(APIView):
@@ -685,7 +648,7 @@ class SendOTPView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+#verify otp
 class VerifyOTPView(APIView):
     """
     Verify the OTP received on the given phone number.
@@ -712,7 +675,7 @@ class VerifyOTPView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+#send email
 class SendEmailView(GenericAPIView):
     serializer_class = EmailSerializer
 
@@ -738,7 +701,7 @@ class SendEmailView(GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #
 
-
+#api to register view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -828,129 +791,7 @@ class RegisterUserView(APIView):
             "errors": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
-# class RegisterUserView(APIView):
-#     """
-#     API endpoint for user registration and JWT validation.
-#     """
-
-#     @swagger_auto_schema(
-#         operation_description="Register a new user",
-#         request_body=RegisterUserSerializer,
-#         responses={
-#             201: openapi.Response(
-#                 "User successfully registered",
-#                 openapi.Schema(
-#                     type=openapi.TYPE_OBJECT,
-#                     properties={
-#                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-#                         'tokens': openapi.Schema(
-#                             type=openapi.TYPE_OBJECT,
-#                             properties={
-#                                 'refresh': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'access': openapi.Schema(type=openapi.TYPE_STRING)
-#                             }
-#                         ),
-#                         'user': openapi.Schema(
-#                             type=openapi.TYPE_OBJECT,
-#                             properties={
-#                                 'id': openapi.Schema(type=openapi.TYPE_INTEGER),
-#                                 'full_name': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'first_name': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'last_name': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'phone_number': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'full_number': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'email': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'is_approved': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'is_deleted': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'is_mute': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'is_stripe_connect': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'device_type': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'device_token': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'country_code': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'country_iso': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'country': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'city': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'state': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'postal_code': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'address': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'bio': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'badge': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'user_type': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'profile_pic_url': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'location': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'default_location': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'total_number_of_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-#                                 'average_rating': openapi.Schema(type=openapi.TYPE_NUMBER),
-#                                 'total_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-#                                 'driver_total_number_of_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-#                                 'driver_average_rating': openapi.Schema(type=openapi.TYPE_NUMBER),
-#                                 'driver_total_rating': openapi.Schema(type=openapi.TYPE_INTEGER),
-#                                 'document_uploaded': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'access_token': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'setting_applied': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'discovery_radius': openapi.Schema(type=openapi.TYPE_NUMBER),
-#                                 'no_delivery': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                                 'recent_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-#                                 'nearest_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-#                                 'highest_earning_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-#                                 'least_earning_orders': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_STRING)),
-#                                 'filter_type': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'email_id': openapi.Schema(type=openapi.TYPE_STRING),
-#                                 'created_at': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DATETIME),
-#                                 'updated_at': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DATETIME),
-#                             }
-#                         ),
-#                     }
-#                 )
-#             ),
-#             400: openapi.Response("Bad request, validation errors"),
-#         },
-#         tags=['Signup Flow']
-#     )
-#     def post(self, request):
-#         """Register a new user and generate JWT tokens."""
-#         serializer = RegisterUserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-
-#             # Retrieve the user from the database using email
-#             email = serializer.validated_data.get("email")
-#             user = User.objects.filter(email=email).first()
-
-#             if user is None:
-#                 print("❌ Error: User not found after creation!")  # Debugging print
-#                 return Response({
-#                     "success": False,
-#                     "message": "User creation failed"
-#                 }, status=status.HTTP_400_BAD_REQUEST)
-
-#             # Generate JWT tokens
-#             refresh = RefreshToken.for_user(user)
-#             access_token = str(refresh.access_token)
-
-#             # Serialize the user profile
-#             user_data = UserProfileSerializer(user).data
-
-#             print(f"✅ User registered: ID={user.id}, Email={user.email}")  # Debugging print
-
-#             return Response({
-#                 "success": True,
-#                 "message": "User registered successfully",
-#                 "tokens": {
-#                     "refresh": str(refresh),
-#                     "access": access_token
-#                 },
-#                 "user": user_data  # Include serialized user data here
-#             }, status=status.HTTP_201_CREATED)
-
-#         print(f"❌ Registration failed: {serializer.errors}")  # Debugging print
-#         return Response({
-#             "success": False,
-#             "errors": serializer.errors
-#         }, status=status.HTTP_400_BAD_REQUEST)
+#api to validate jwt
 
 class ValidateJWTView(APIView):
     """
@@ -999,147 +840,3 @@ class ValidateJWTView(APIView):
             }
         }, status=status.HTTP_200_OK)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class SocialLoginOrRegisterView(APIView):
-
-#     @swagger_auto_schema(
-#         operation_description="Register or log in a user via social sign-in.",
-#         request_body=SocialRegistrationSerializer,
-#         responses={
-#             200: openapi.Response(
-#                 description="Successfully logged in or registered the user",
-#                 schema=SocialRegistrationSerializer
-#             ),
-#             400: openapi.Response(
-#                 description="Failed to register or log in the user",
-#                 schema=openapi.Schema(
-#                     type=openapi.TYPE_OBJECT,
-#                     properties={
-#                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-#                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-#                         'errors': openapi.Schema(type=openapi.TYPE_OBJECT)
-#                     }
-#                 )
-#             )
-#         }
-#     )
-#     def post(self, request):
-#         # Use the serializer to validate the incoming data
-#         serializer = SocialRegistrationSerializer(data=request.data)
-
-#         if serializer.is_valid():
-#             # Save the user or update if exists
-#             user = serializer.save()
-
-#             # If the user doesn't have an ID, retrieve by email (for social login)
-#             if not user.id:
-#                 email = request.data.get('email')  # Get email from request
-#                 user_by_email = get_object_or_404(User, email=email)
-#                 user = user_by_email  # Use the user retrieved by email
-
-#             # Generate JWT token for the user
-#             refresh = RefreshToken.for_user(user)
-#             access_token = str(refresh.access_token)
-
-#             # Determine whether the user is new or existing
-#             if user.pk:  # If user exists (logged in)
-#                 message = 'User logged in successfully.'
-#             else:  # If user is newly created (registered)
-#                 message = 'User registered successfully.'
-
-#             return Response({
-#                 'success': True,
-#                 'message': message,
-#                 'data': {
-#                     'refresh': str(refresh),
-#                     'access': access_token,
-#                     'id': user.id,
-#                     'user': serializer.data
-#                 }
-#             }, status=status.HTTP_200_OK)
-
-#         return Response({
-#             'success': False,
-#             'message': 'Failed to register or log in user.',
-#             'errors': serializer.errors
-#         }, status=status.HTTP_400_BAD_REQUEST)
-
-class SocialLoginOrRegisterView(APIView):
-
-    @swagger_auto_schema(
-        operation_description="Register or log in a user via social sign-in.",
-        request_body=SocialRegistrationSerializer,
-        responses={
-            200: openapi.Response(
-                description="Successfully logged in or registered the user",
-                schema=SocialRegistrationSerializer
-            ),
-            400: openapi.Response(
-                description="Failed to register or log in the user",
-                schema=openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                        'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        'errors': openapi.Schema(type=openapi.TYPE_OBJECT)
-                    }
-                )
-            )
-        }
-    )
-    def post(self, request):
-        """Handle social login or user registration."""
-        email = request.data.get("email")
-        user = User.objects.filter(email=email).first()
-
-        if user:
-            # User already exists, proceed to log them in
-            message = "User logged in successfully."
-        else:
-            # User does not exist, proceed to register
-            serializer = SocialRegistrationSerializer(data=request.data)
-            if serializer.is_valid():
-                user = serializer.save()
-                message = "User registered successfully."
-            else:
-                return Response({
-                    "success": False,
-                    "message": "Failed to register user.",
-                    "errors": serializer.errors
-                }, status=status.HTTP_400_BAD_REQUEST)
-
-        # Generate JWT tokens
-        refresh = RefreshToken.for_user(user)
-        access_token = str(refresh.access_token)
-
-        return Response({
-            'success': True,
-            'message': message,
-            'data': {
-                'refresh': str(refresh),
-                'access': access_token,
-                'id': user.id,
-                'user': UserProfileSerializer(user).data  # Serialize user profile
-            }
-        }, status=status.HTTP_200_OK)

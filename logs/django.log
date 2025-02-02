@@ -998,3 +998,19 @@ INFO 2025-02-02 00:10:48,483 basehttp 22200 22144 "POST /admin/login/?next=/admi
 INFO 2025-02-02 00:10:57,657 basehttp 22200 22144 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3399
 INFO 2025-02-02 00:11:17,997 basehttp 22200 22144 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
 INFO 2025-02-02 00:11:18,075 basehttp 22200 22144 "GET /admin/ HTTP/1.1" 200 14014
+INFO 2025-02-02 19:15:49,260 autoreload 29176 3596 Watching for file changes with StatReloader
+INFO 2025-02-02 19:17:12,613 autoreload 16248 4924 Watching for file changes with StatReloader
+INFO 2025-02-02 19:17:16,284 basehttp 16248 5056 "GET / HTTP/1.1" 200 1633
+INFO 2025-02-02 19:17:16,411 basehttp 16248 5056 "GET /?format=openapi HTTP/1.1" 200 21125
+INFO 2025-02-02 19:17:21,795 basehttp 16248 5056 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-02-02 19:17:21,816 basehttp 16248 5056 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3079
+INFO 2025-02-02 19:17:26,063 basehttp 16248 5056 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3399
+INFO 2025-02-02 19:17:45,932 basehttp 16248 5056 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-02-02 19:17:46,156 basehttp 16248 5056 "GET /admin/ HTTP/1.1" 200 14014
+INFO 2025-02-02 19:17:46,317 basehttp 16248 5056 "GET /static/jazzmin/js/main.js HTTP/1.1" 200 2391
+INFO 2025-02-02 19:17:46,330 basehttp 16248 10424 "GET /static/vendor/fontawesome-free/webfonts/fa-regular-400.woff2 HTTP/1.1" 200 25392
+INFO 2025-02-02 19:17:53,231 basehttp 16248 10424 "GET /admin/file_storage/uploadedfile/ HTTP/1.1" 200 17899
+INFO 2025-02-02 19:17:53,265 basehttp 16248 10424 "GET /static/vendor/select2/css/select2.min.css HTTP/1.1" 200 16264
+INFO 2025-02-02 19:17:53,276 basehttp 16248 23372 "GET /static/jazzmin/js/change_list.js HTTP/1.1" 200 2252
+INFO 2025-02-02 19:17:53,276 basehttp 16248 10424 "GET /static/vendor/select2/js/select2.min.js HTTP/1.1" 200 73170
+INFO 2025-02-02 19:17:53,301 basehttp 16248 5056 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
