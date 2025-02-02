@@ -1190,3 +1190,36 @@ INFO 2025-02-02 21:21:27,256 basehttp 17716 26872 "GET /static/drf-yasg/swagger-
 INFO 2025-02-02 21:21:27,265 basehttp 17716 18064 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js HTTP/1.1" 200 1046583
 INFO 2025-02-02 21:21:27,387 basehttp 17716 18064 "GET /?format=openapi HTTP/1.1" 200 21125
 INFO 2025-02-02 21:21:27,387 basehttp 17716 26872 "GET /static/drf-yasg/swagger-ui-dist/favicon-32x32.png HTTP/1.1" 200 628
+INFO 2025-02-02 21:35:58,822 autoreload 2980 940 Watching for file changes with StatReloader
+INFO 2025-02-02 21:36:20,604 basehttp 2980 29984 "GET / HTTP/1.1" 200 1633
+INFO 2025-02-02 21:36:21,127 basehttp 2980 9972 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js HTTP/1.1" 200 322863
+INFO 2025-02-02 21:36:21,130 basehttp 2980 9972 "GET /static/drf-yasg/swagger-ui-init.js HTTP/1.1" 200 15480
+INFO 2025-02-02 21:36:21,160 basehttp 2980 29984 "GET /static/drf-yasg/style.css HTTP/1.1" 200 1047
+INFO 2025-02-02 21:36:21,182 basehttp 2980 10728 "GET /static/drf-yasg/immutable.min.js HTTP/1.1" 200 56904
+INFO 2025-02-02 21:36:21,188 basehttp 2980 19820 "GET /static/drf-yasg/insQ.min.js HTTP/1.1" 200 2093
+INFO 2025-02-02 21:36:21,190 basehttp 2980 27792 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui.css HTTP/1.1" 200 145206
+INFO 2025-02-02 21:36:21,191 basehttp 2980 19904 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js HTTP/1.1" 200 1046583
+INFO 2025-02-02 21:36:21,336 basehttp 2980 27792 "GET /static/drf-yasg/swagger-ui-dist/favicon-32x32.png HTTP/1.1" 200 628
+INFO 2025-02-02 21:36:21,372 basehttp 2980 19904 "GET /?format=openapi HTTP/1.1" 200 21125
+INFO 2025-02-02 21:36:28,665 basehttp 2980 19904 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3079
+INFO 2025-02-02 21:36:28,699 basehttp 2980 19904 "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 200 103009
+INFO 2025-02-02 21:36:28,710 basehttp 2980 19904 "GET /static/jazzmin/css/main.css HTTP/1.1" 200 16969
+INFO 2025-02-02 21:36:28,728 basehttp 2980 19904 "GET /static/vendor/adminlte/img/AdminLTELogo.png HTTP/1.1" 200 2637
+INFO 2025-02-02 21:36:28,756 basehttp 2980 19820 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-02-02 21:36:28,772 basehttp 2980 27792 "GET /static/vendor/adminlte/css/adminlte.min.css HTTP/1.1" 200 1382975
+INFO 2025-02-02 21:36:28,779 basehttp 2980 27792 "GET /static/vendor/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 62440
+INFO 2025-02-02 21:36:28,820 basehttp 2980 27792 "GET /static/vendor/adminlte/js/adminlte.min.js HTTP/1.1" 200 44244
+INFO 2025-02-02 21:36:29,242 basehttp 2980 27792 "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 156400
+INFO 2025-02-02 22:12:45,966 basehttp 2980 25088 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-02-02 22:12:45,974 basehttp 2980 25088 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3079
+INFO 2025-02-02 22:12:46,027 basehttp 2980 22708 "GET /static/jazzmin/css/main.css HTTP/1.1" 200 16969
+INFO 2025-02-02 22:12:46,028 basehttp 2980 23136 "GET /static/vendor/adminlte/img/AdminLTELogo.png HTTP/1.1" 200 2637
+INFO 2025-02-02 22:12:46,030 basehttp 2980 25088 "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 200 103009
+INFO 2025-02-02 22:12:46,031 basehttp 2980 29072 "GET /static/vendor/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 62440
+INFO 2025-02-02 22:12:46,031 basehttp 2980 28412 "GET /static/vendor/adminlte/js/adminlte.min.js HTTP/1.1" 200 44244
+INFO 2025-02-02 22:12:46,042 basehttp 2980 3104 "GET /static/vendor/adminlte/css/adminlte.min.css HTTP/1.1" 200 1382975
+INFO 2025-02-02 22:12:46,086 basehttp 2980 3104 "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 156400
+INFO 2025-02-02 22:12:58,008 basehttp 2980 3104 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3399
+INFO 2025-02-02 22:13:04,495 basehttp 2980 3104 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3399
+INFO 2025-02-02 22:13:21,954 autoreload 2980 940 C:\Users\Obaidullah\Desktop\New folder (6)\Here2Dare\H2D\settings.py changed, reloading.
+INFO 2025-02-02 22:13:22,541 autoreload 8120 27448 Watching for file changes with StatReloader
